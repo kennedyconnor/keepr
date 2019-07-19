@@ -1,3 +1,5 @@
+-- USE keeprdatabase;
+
 -- CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,
 --     username VARCHAR(20) NOT NULL,
@@ -61,6 +63,6 @@
 
 
 -- -- USE THIS LINE FOR GET KEEPS BY VAULTID
--- SELECT * FROM vaultkeeps vk
--- INNER JOIN keeps k ON k.id = vk.keepId 
--- WHERE (vaultId = @vaultId AND vk.userId = @userId) 
+-- -- SELECT * FROM vaultkeeps vk
+-- -- INNER JOIN keeps k ON k.id = vk.keepId 
+-- -- WHERE (vaultId = @vaultId AND vk.userId = @userId) 
