@@ -28,6 +28,13 @@ namespace keepr.Repositories
       return data;
     }
 
+    public IEnumerable<Vault> GetByUser(string userId)
+    {
+      string query = "SELECT * FROM vaults WHERE userId = @userId";
+      IEnumerable<Vault> data = _db.Query<Vault>(query, new { userId });
+      if (data == null) throw new Exception("Invalid ID");
+      return data;
+    }
     public Vault Create(Vault data)
     {
       string query = @"
@@ -52,6 +59,7 @@ namespace keepr.Repositories
            ";
       return _db.QueryFirstOrDefault<Vault>(query, data);
     }
+
 
     public string Delete(int id)
     {

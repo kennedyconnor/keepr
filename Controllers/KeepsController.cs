@@ -70,6 +70,7 @@ namespace keepr.Controllers
     {
       try
       {
+        data.UserId = HttpContext.User.FindFirstValue("Id");
         return Ok(_repo.Create(data));
       }
       catch (Exception e)
