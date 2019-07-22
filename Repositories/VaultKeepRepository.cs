@@ -15,10 +15,14 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    public IEnumerable<VaultKeep> GetAll(int vaultId)
+    public IEnumerable<Keep> GetAll(int vaultId, string userId)
     {
-      string query = "SELECT * FROM vaultkeeps WHERE vaultId = @vaultId";
-      IEnumerable<VaultKeep> data = _db.Query<VaultKeep>(query, new { vaultId });
+      string query = @"SELECT * FROM vaultkeeps vk
+      INNER JOIN keeps k on k.id = vk.keepId
+      WHERE (vaultId = @vaultId AND vk.userId = @userId);
+      
+      ";
+      IEnumerable<Keep> data = _db.Query<Keep>(query, new { vaultId, userId });
       if (data == null) throw new Exception("Invalid ID");
       return data;
     }

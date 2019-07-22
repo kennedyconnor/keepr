@@ -20,11 +20,12 @@ namespace keepr.Controllers
     }
     //GET api/vaultkeeps
     [HttpGet("{id}")]
-    public ActionResult<IEnumerable<VaultKeep>> Get(int id)
+    public ActionResult<IEnumerable<Keep>> Get(int id)
     {
       try
       {
-        return Ok(_repo.GetAll(id));
+        string userId = HttpContext.User.FindFirstValue("Id");
+        return Ok(_repo.GetAll(id, userId));
       }
       catch (Exception e)
       {
