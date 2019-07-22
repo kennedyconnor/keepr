@@ -3,6 +3,8 @@ using keepr.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace keepr.Controllers
 {
@@ -44,7 +46,25 @@ namespace keepr.Controllers
       }
     }
 
-    //POST api/vaualts
+    //GET api/keeps/user
+    [Authorize]
+    [HttpGet("user")]
+
+    public ActionResult<IEnumerable<Keep>> GetByUser()
+    {
+      try
+      {
+        var id = HttpContext.User.FindFirstValue("Id");
+        return Ok(_repo.GetByUser(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
+    //POST api/keeps
+    [Authorize]
     [HttpPost]
     public ActionResult<Keep> Post([FromBody] Keep data)
     {
@@ -72,7 +92,7 @@ namespace keepr.Controllers
         return BadRequest(e);
       }
     }
-
+    [Authorize]
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {

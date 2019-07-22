@@ -31,7 +31,7 @@ namespace keepr.Repositories
     public Vault Create(Vault data)
     {
       string query = @"
-            INSERT INTO teams (name, description, userId)
+            INSERT INTO vaults (name, description, userId)
             VALUES (@Name, @Description, @UserId);
             SELECT LAST_INSERT_ID();
             ";
@@ -43,12 +43,12 @@ namespace keepr.Repositories
     public Vault Update(Vault data)
     {
       string query = @"
-            UPDATE teams 
+            UPDATE vaults 
             SET
             name = @Name,
             description = @Description,
             WHERE id = @Id ;
-            SELECT * FROM teams WHERE id = @Id ;
+            SELECT * FROM vaults WHERE id = @Id ;
            ";
       return _db.QueryFirstOrDefault<Vault>(query, data);
     }
@@ -58,7 +58,7 @@ namespace keepr.Repositories
       string query = "DELETE FROM vaults WHERE id = @Id;";
       int changedRows = _db.Execute(query, new { id });
       if (changedRows < 1) throw new Exception("Invalid Id");
-      return "Successfully Deleted Team";
+      return "Successfully Deleted Vault";
     }
   }
 }

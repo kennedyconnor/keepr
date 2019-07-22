@@ -28,11 +28,18 @@ namespace keepr.Repositories
       return data;
     }
 
+    public IEnumerable<Keep> GetByUser(string userId)
+    {
+      string query = "SELECT * FROM keeps WHERE userId = @userId";
+      IEnumerable<Keep> data = _db.Query<Keep>(query, new { userId });
+      if (data == null) throw new Exception("Invalid ID");
+      return data;
+    }
     public Keep Create(Keep data)
     {
       string query = @"
-            INSERT INTO teams (name, description, userId)
-            VALUES (@Name, @Description, @UserId);
+            INSERT INTO keeps (name, description, img, isPrivate)
+            VALUES (@Name, @Description, @Img, @IsPrivate);
             SELECT LAST_INSERT_ID();
             ";
       int id = _db.ExecuteScalar<int>(query, data);
@@ -43,22 +50,25 @@ namespace keepr.Repositories
     public Keep Update(Keep data)
     {
       string query = @"
-            UPDATE teams 
+            UPDATE keeps 
             SET
             name = @Name,
             description = @Description,
+            img = @Img,
+            isPrivate = @IsPrivate
             WHERE id = @Id ;
-            SELECT * FROM teams WHERE id = @Id ;
+            SELECT * FROM keeps WHERE id = @Id ;
            ";
       return _db.QueryFirstOrDefault<Keep>(query, data);
     }
+
 
     public string Delete(int id)
     {
       string query = "DELETE FROM keeps WHERE id = @Id;";
       int changedRows = _db.Execute(query, new { id });
       if (changedRows < 1) throw new Exception("Invalid Id");
-      return "Successfully Deleted Team";
+      return "Successfully Deleted Keep";
     }
   }
 }
