@@ -33,7 +33,7 @@ namespace keepr.Controllers
       }
     }
 
-    //POST api/vaultkeepss
+    //POST api/vaultkeeps
     [Authorize]
     [HttpPost]
     public ActionResult<VaultKeep> Post([FromBody] VaultKeep data)
@@ -49,7 +49,8 @@ namespace keepr.Controllers
       }
     }
 
-    //PUT api/vaultkeepss/5
+    //PUT api/vaultkeeps/5
+    // this is actually a delete
     [HttpPut]
     public ActionResult<string> Put([FromBody] VaultKeep data)
     {
