@@ -6,7 +6,7 @@
         My Vaults
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" v-for="vault in vaults">{{vault.name}}</a>
+        <a class="dropdown-item" @click="selectVault(vault.id)" v-for="vault in vaults">{{vault.name}}</a>
       </div>
     </div>
   </div>
@@ -25,7 +25,11 @@
         return this.$store.state.vaults
       }
     },
-    methods: {},
+    methods: {
+      selectVault(vaultId) {
+        this.$router.push({ name: "vaults", params: { vaultId } })
+      }
+    },
     components: {}
   }
 </script>
