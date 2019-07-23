@@ -59,7 +59,7 @@
     computed: {},
     methods: {
       createKeep() {
-        if (this.name == "" || this.description == "") {
+        if (this.name == "" || this.description == "" || this.img == "") {
           alert("Please fill out the required fields.")
           return
         }

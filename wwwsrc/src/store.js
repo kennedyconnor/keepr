@@ -85,7 +85,6 @@ export default new Vuex.Store({
     },
     async createKeep({ commit, dispatch }, payload) {
       try {
-        debugger
         await api.post("keeps", payload)
         dispatch("getAllKeeps")
       } catch (error) {
