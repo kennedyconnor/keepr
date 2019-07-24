@@ -12,8 +12,9 @@
     <div class="row">
       <DashBoardVaults v-for="vault in vaults" v-bind:vault="vault" />
     </div>
+    <h3>Your Keeps</h3>
     <div class="row">
-
+      <DashBoardKeeps v-for="keep in yourKeeps" v-bind:keep="keep" />
     </div>
   </div>
 </template>
@@ -22,7 +23,7 @@
   import DashBoardVaults from "@/components/DashBoardVaults.vue"
   import DashBoardKeeps from "@/components/DashBoardKeeps.vue"
   export default {
-    name: "",
+    name: "Dashboard",
     props: [],
     data() {
       return {}
@@ -30,6 +31,9 @@
     computed: {
       vaults() {
         return this.$store.state.vaults
+      },
+      yourKeeps() {
+        return this.$store.state.keeps.filter(k => k.userId == this.$store.state.user.id)
       }
     },
     methods: {},
