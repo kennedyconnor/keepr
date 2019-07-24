@@ -4,7 +4,7 @@
       <img class="card-img-top" :src="keep.img">
       <div class="card-body d-flex justify-content-around">
         <a class="btn btn-primary" data-toggle="modal" :data-target="'#modal'+keep.id">View</a>
-        <a class="btn btn-danger" @click="deleteKeep()">Delete</a>
+        <a class="btn btn-danger" @click="removeKeep(keep.id)">Remove</a>
 
       </div>
     </div>
@@ -36,15 +36,19 @@
 
 <script>
   export default {
-    name: "DashboardKeeps",
-    props: ["keep"],
+    name: "VaultKeep",
+    props: ["keep", "vaultId"],
     data() {
       return {}
     },
     computed: {},
     methods: {
-      deleteKeep() {
-        this.$store.dispatch("deleteKeep", this.keep.id)
+      removeKeep(keepId) {
+        let vaultKeepToDelete = {
+          keepId: keepId,
+          vaultId: this.vaultId
+        }
+        this.$store.dispatch("deleteVaultKeep", vaultKeepToDelete)
       }
     },
     components: {}

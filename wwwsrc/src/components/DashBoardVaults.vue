@@ -15,14 +15,14 @@
 
 <script>
   export default {
-    name: "Dashboard Vaults",
+    name: "DashboardVaults",
     props: ["vault"],
     data() {
       return {}
     },
     methods: {
       toVault(vaultId) {
-        this.$router.push({ name: "vaults", param: vaultId })
+        this.$router.push({ name: "vaults", params: { vaultId } })
       },
       deleteVault() {
         this.$store.dispatch("deleteVault", this.vault.id)
