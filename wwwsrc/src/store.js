@@ -18,6 +18,7 @@ export default new Vuex.Store({
   state: {
     user: {},
     keeps: [],
+    activeVaultKeeps: [],
     activeVault: {},
     vaults: [],
   },
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     setKeeps(state, keeps) {
       state.keeps = keeps;
+    },
+    setActiveVaultKeeps(state, activeVaultKeeps) {
+      state.activeVaultKeeps = activeVaultKeeps;
     },
     setActiveVault(state, vault) {
       state.activeVault = vault;
@@ -91,6 +95,22 @@ export default new Vuex.Store({
         console.warn(error.message)
       }
     },
+    async editKeep({ commit, dispatch }, payload) {
+      try {
+        await api.put("keeps/" + payload.id, payload)
+        dispatch("getAllKeeps")
+      } catch (error) {
+        console.warn(error.message)
+      }
+    },
+    async deleteKeep({ commit, dispatch }, id) {
+      try {
+        await api.delete("keeps/" + id)
+        dispatch("getAllKeeps")
+      } catch (error) {
+        console.warn(error.message)
+      }
+    },
     //#endregion
 
     //#region VAULTS
@@ -106,6 +126,43 @@ export default new Vuex.Store({
       try {
         await api.post("vaults", payload)
         dispatch("getUserVaults")
+      } catch (error) {
+        console.warn(error.message)
+      }
+    },
+    async deleteVault({ commit, dispatch }, id) {
+      try {
+        await api.delete("vaults/" + id)
+        dispatch("getUserVaults")
+      } catch (error) {
+        console.warn(error.message)
+      }
+    },
+
+    //#endregion
+
+    //#region VAULTKEEPS
+    async getKeepsByVault({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("vaultkeeps/" + id)
+        commit("setActiveVaultKeeps", res.data)
+      } catch (e) {
+        console.warn(e.message)
+      }
+    },
+    async createVaultKeep({ commit, dispatch }, payload) {
+      try {
+        await api.post("vaultkeeps", payload)
+        dispatch("getKeepsByVault", payload.vaultId)
+      } catch (error) {
+        console.warn(error.message)
+      }
+    },
+
+    async deleteVaultKeep({ commit, dispatch }, payload) {
+      try {
+        await api.put("vaultkeeps", payload)
+        dispatch("getAllKeeps")
       } catch (error) {
         console.warn(error.message)
       }

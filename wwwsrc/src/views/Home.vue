@@ -1,5 +1,5 @@
 <template>
-  <div class="home container-fluid">
+  <div class="home">
 
     <div class="row">
       <div class="col-4 offset-4">
@@ -7,7 +7,9 @@
         <button v-if="user.id" @click="logout">logout</button>
         <router-link v-else :to="{name: 'login'}">Login</router-link>
       </div>
-      <VaultsDropdown v-if="user.id" />
+      <div class="col-4" v-if="user.id">
+        <button class="btn btn-secondary" @click="routeDashboard()">Dashboard</button>
+      </div>
     </div>
 
     <div class="row">
@@ -22,7 +24,6 @@
   import Keeps from "@/components/Keeps.vue"
   import CreateKeep from "@/components/CreateKeep.vue"
   import CreateVault from "@/components/CreateVault.vue"
-  import VaultsDropdown from "@/components/VaultsDropdown.vue"
   export default {
     name: "home",
     computed: {
@@ -34,6 +35,9 @@
     methods: {
       logout() {
         this.$store.dispatch("logout");
+      },
+      routeDashboard() {
+        this.$router.push({ name: "dashboard" })
       }
     },
     mounted() {
@@ -44,7 +48,6 @@
       Keeps,
       CreateKeep,
       CreateVault,
-      VaultsDropdown
     }
   };
 </script>
