@@ -1,5 +1,5 @@
 <template>
-  <div class="keepcard col-4">
+  <div class="keepcard col-3">
 
 
     <div class="card">
@@ -66,8 +66,11 @@
         this.$store.dispatch("editKeep", this.keep)
 
       },
-      addKeep(vaultId, keepId) {
-        let newVaultKeep = { vaultId, keepId }
+      addKeep(vaultId) {
+        let newVaultKeep = {
+          vaultId: vaultId,
+          keepId: this.keep.id
+        }
         this.$store.dispatch("createVaultKeep", newVaultKeep)
         this.keep.keeps++;
         this.$store.dispatch("editKeep", this.keep)

@@ -58,7 +58,7 @@ namespace keepr.Repositories
             isPrivate = @IsPrivate,
             views = @Views,
             shares = @Shares,
-            keeps = @Keeps,
+            keeps = @Keeps
             WHERE id = @Id ;
             SELECT * FROM keeps WHERE id = @Id ;
            ";

@@ -11,7 +11,7 @@
       <div class="modal-dialog modal-dialog-centered" role="form">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="vaultModalLongTitle">Create A Keep</h5>
+            <h5 class="modal-title" id="vaultModalLongTitle">Create A Vault</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -37,7 +37,7 @@
 
 <script>
   export default {
-    name: "CreateKeep",
+    name: "CreateVault",
     props: [],
     data() {
       return {
