@@ -55,7 +55,10 @@ namespace keepr.Repositories
             name = @Name,
             description = @Description,
             img = @Img,
-            isPrivate = @IsPrivate
+            isPrivate = @IsPrivate,
+            views = @Views,
+            shares = @Shares,
+            keeps = @Keeps,
             WHERE id = @Id ;
             SELECT * FROM keeps WHERE id = @Id ;
            ";

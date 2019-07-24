@@ -17,7 +17,7 @@
           </div>
         </a>
         <a>{{keep.keeps}}</a>
-        <a class="btn btn-warning">Share</a>
+        <a class="btn btn-warning" @click="shareKeep()">Share</a>
         <a>{{keep.shares}}</a>
       </div>
     </div>
@@ -69,9 +69,12 @@
       addKeep(vaultId, keepId) {
         let newVaultKeep = { vaultId, keepId }
         this.$store.dispatch("createVaultKeep", newVaultKeep)
+        this.keep.keeps++;
+        this.$store.dispatch("editKeep", this.keep)
       },
       shareKeep() {
-
+        this.keep.shares++;
+        this.$store.dispatch("editKeep", this.keep)
       }
     },
     components: {}
