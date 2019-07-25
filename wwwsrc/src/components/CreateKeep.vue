@@ -70,10 +70,10 @@
           isPrivate: this.isPrivate
         }
         this.$store.dispatch("createKeep", newKeep)
-        name = ""
-        description = ""
-        img = ""
-        isPrivate = false
+        this.name = ""
+        this.description = ""
+        this.img = ""
+        this.isPrivate = false
 
       }
     },

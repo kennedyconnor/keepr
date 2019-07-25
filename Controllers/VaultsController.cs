@@ -24,7 +24,8 @@ namespace keepr.Controllers
     {
       try
       {
-        return Ok(_repo.GetAll());
+        var id = HttpContext.User.FindFirstValue("Id");
+        return Ok(_repo.GetAll(id));
       }
       catch (Exception e)
       {
@@ -99,7 +100,8 @@ namespace keepr.Controllers
     {
       try
       {
-        return Ok(_repo.Delete(id));
+        var userId = HttpContext.User.FindFirstValue("Id");
+        return Ok(_repo.Delete(id, userId));
       }
       catch (Exception e)
       {
