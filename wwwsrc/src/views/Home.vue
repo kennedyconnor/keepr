@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <div class="row">
+    <div class="row" id="header">
       <div class="col-4 offset-4">
         <h3>Welcome Home {{user.username}}</h3>
         <button v-if="user.id" @click="logout">logout</button>
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="buttonrow">
       <CreateKeep v-if="user.id" />
       <CreateVault v-if="user.id" />
     </div>
@@ -51,3 +51,12 @@
     }
   };
 </script>
+<style>
+  #header {
+    margin-top: 10px;
+  }
+
+  #buttonrow {
+    margin-bottom: 10px;
+  }
+</style>
